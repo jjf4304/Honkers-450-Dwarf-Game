@@ -27,7 +27,7 @@ public class Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        cam.transform.position = new Vector3(0, transform.position.y - offset, -10f);
+        cam.transform.position = new Vector3(0, transform.position.y - offset, cam.transform.position.z);
         sideSpeed = 0f;
         if (Input.GetKey(KeyCode.A))
         {
@@ -70,20 +70,7 @@ public class Movement : MonoBehaviour
 
         
 
-
-
     }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag.Equals("Left Wall"))
-        {
-            
-        }
 
-        if (collision.gameObject.tag.Equals("Right Wall"))
-        {
-
-        }
-    }
 
 }
