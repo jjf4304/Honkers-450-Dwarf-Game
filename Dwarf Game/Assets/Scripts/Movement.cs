@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     private float offset;
     public float downSpeed;
     public float sideSpeed;
+    float speedMod;
     public List<GameObject> trailObjects;
 
     int trailIndex;
@@ -94,4 +95,15 @@ public class Movement : MonoBehaviour
         rotateShipBy = 0;
         rigid.velocity = new Vector2(sideSpeed, downSpeed);
     }
+
+    void ModifySpeed(float modifier)
+    {
+
+        //if modifier ==0, reset to original speeds
+        //else, modify speeds speed*=mod
+
+        //downSpeed *= modifier;
+        //sideSpeed *= modifier;
+    }
+
 }
