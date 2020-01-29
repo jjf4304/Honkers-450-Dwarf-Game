@@ -8,13 +8,14 @@ public class EnergyBar : MonoBehaviour
     // Start is called before the first frame update
 
     public Image energyFill;
-    public float counter, elapsedTime;
+    public float counter;
+    public int elapsedTime;
     public float maxTime = 100f;
     private bool gameOver;
 
     void Start()
     {
-        elapsedTime = 0f;
+        elapsedTime = 0;
         counter = 0f;
         gameOver = false;
     }

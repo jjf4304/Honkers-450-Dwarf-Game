@@ -8,10 +8,9 @@ public class Movement : MonoBehaviour
 
     public Rigidbody2D rigid;
     public GameObject cam;
-    private float offset;
+    private float offset, speedMod;
     public float downSpeed;
     public float sideSpeed;
-    float speedMod;
     public List<GameObject> trailObjects;
 
     int trailIndex;
@@ -24,6 +23,7 @@ public class Movement : MonoBehaviour
     {
         downSpeed = -10f;
         sideSpeed = 0f;
+        speedMod = 1f;
         rigid = GetComponent<Rigidbody2D>();
         offset = transform.position.y - cam.transform.position.y;
         trailIndex = 0;
@@ -40,7 +40,6 @@ public class Movement : MonoBehaviour
     // Places and moves the trail as the player moves
     void HandleTrail()
     {
-        Debug.Log(trailIndex);
         trailObjects[trailIndex].transform.position = new Vector3(transform.position.x, transform.position.y, 10);
         trailObjects[trailIndex].transform.rotation = transform.rotation;
         if (trailIndex == trailObjects.Count - 1)
@@ -93,17 +92,14 @@ public class Movement : MonoBehaviour
         }
         transform.Rotate(new Vector3(0f, 0f, rotateShipBy));
         rotateShipBy = 0;
-        rigid.velocity = new Vector2(sideSpeed, downSpeed);
+        rigid.velocity = new Vector2(sideSpeed/speedMod, downSpeed/speedMod);
     }
 
-    void ModifySpeed(float modifier)
+    public void ModifySpeed(float modifier)
     {
-
-        //if modifier ==0, reset to original speeds
-        //else, modify speeds speed*=mod
-
-        //downSpeed *= modifier;
-        //sideSpeed *= modifier;
+        //when leaving obstacle collider, set back to 1
+        //when entering/while within, set to slowdown
+        speedMod = modifier;
     }
 
 }
