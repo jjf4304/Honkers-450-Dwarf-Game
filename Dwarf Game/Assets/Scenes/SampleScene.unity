@@ -3367,8 +3367,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  score: 0
-  speedMod: 0
+  ptTracker: {fileID: 0}
+  scoreOnCollide: 0
+  speedMod: 5
   playerMove: {fileID: 0}
 --- !u!212 &1834714852
 SpriteRenderer:
