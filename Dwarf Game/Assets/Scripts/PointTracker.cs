@@ -5,19 +5,32 @@ using UnityEngine.UI;
 
 public class PointTracker : MonoBehaviour
 {
-    private EnergyBar energyScript;
+    private float counter;
 
     public GameObject pointDisplay;
+    public int points;
 
     // Start is called before the first frame update
     void Start()
     {
-        energyScript = GetComponent<EnergyBar>();
+        points = 0;
+        counter = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointDisplay.GetComponent<Text>().text = energyScript.elapsedTime.ToString();
+        counter += Time.deltaTime;
+        if (counter > 0.5f)
+        {
+            counter = 0;
+            points += 1;
+            UpdatePoints();
+        }
+    }
+
+    void UpdatePoints()
+    {
+        pointDisplay.GetComponent<Text>().text = points.ToString();
     }
 }
