@@ -12,6 +12,7 @@ public class Collidable : MonoBehaviour
     public int scoreOnCollide;
     public float speedMod;
     public Movement playerMove;
+    private bool scored;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,7 @@ public class Collidable : MonoBehaviour
             playerMove = FindObjectOfType<Movement>().GetComponent<Movement>();
         if (ptTracker == null)
             ptTracker = FindObjectOfType<PointTracker>().GetComponent<PointTracker>();
+        scored = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -32,10 +34,12 @@ public class Collidable : MonoBehaviour
                 //slow down until exit
                 playerMove.ModifySpeed(speedMod);
             }
-            else if(type == colliderType.Scoreable)
+            else if(type == colliderType.Scoreable && !scored)
             {
                 //add score
-                
+                Debug.Log("IN SCOREABLE");
+                scored = true;
+                ptTracker.AddScore(scoreOnCollide);
             }
         }
     }

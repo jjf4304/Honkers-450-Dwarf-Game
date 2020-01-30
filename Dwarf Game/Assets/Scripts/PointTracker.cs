@@ -8,16 +8,23 @@ public class PointTracker : MonoBehaviour
     private EnergyBar energyScript;
 
     public GameObject pointDisplay;
+    public float score;
 
     // Start is called before the first frame update
     void Start()
     {
         energyScript = GetComponent<EnergyBar>();
+        score = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pointDisplay.GetComponent<Text>().text = energyScript.elapsedTime.ToString();
+        pointDisplay.GetComponent<Text>().text = score.ToString();   
+    }
+
+    public void AddScore(float scoreToAdd)
+    {
+        score += scoreToAdd;
     }
 }
