@@ -30,14 +30,13 @@ public class Collidable : MonoBehaviour
         {
             if (type == colliderType.Rock)
             {
-                Debug.Log("INSIDE");
                 //slow down until exit
                 playerMove.ModifySpeed(speedMod);
             }
             else if(type == colliderType.Scoreable && !scored)
             {
                 //add score
-                Debug.Log("IN SCOREABLE");
+                
                 scored = true;
                 ptTracker.AddScore(scoreOnCollide);
             }
