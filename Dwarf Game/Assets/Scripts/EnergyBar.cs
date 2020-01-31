@@ -12,13 +12,13 @@ public class EnergyBar : MonoBehaviour
     public float counter;
     public int elapsedTime;
     public float maxTime = 100f;
-    private bool gameOver;
+    //private bool gameOver;
 
     void Start()
     {
         elapsedTime = 0;
         counter = 0f;
-        gameOver = false;
+        //gameOver = false;
         if (ptTracker == null)
             ptTracker = FindObjectOfType<PointTracker>().GetComponent<PointTracker>();
     }
