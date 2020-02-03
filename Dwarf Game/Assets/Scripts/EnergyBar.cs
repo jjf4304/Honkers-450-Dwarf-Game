@@ -8,7 +8,6 @@ public class EnergyBar : MonoBehaviour
     // Start is called before the first frame update
 
     public Image energyFill;
-    public PointTracker ptTracker;
     public float counter;
     public int elapsedTime;
     public float maxTime = 100f;
@@ -19,8 +18,6 @@ public class EnergyBar : MonoBehaviour
         elapsedTime = 0;
         counter = 0f;
         //gameOver = false;
-        if (ptTracker == null)
-            ptTracker = FindObjectOfType<PointTracker>().GetComponent<PointTracker>();
     }
 
     // Update is called once per frame
@@ -32,7 +29,6 @@ public class EnergyBar : MonoBehaviour
             counter = 0f;
             elapsedTime++;
             energyFill.fillAmount = (maxTime-elapsedTime)/maxTime;
-            ptTracker.AddScore(1);
         }
         
     }

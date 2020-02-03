@@ -12,11 +12,14 @@ public class Movement : MonoBehaviour
     public float downSpeed;
     public float sideSpeed;
     public List<GameObject> trailObjects;
+    public PointTracker ptTracker;
+    public EnergyBar energyBar;
 
     int trailIndex;
     float rotateShipBy = 0;
     const float rotationAmount = 1.0f;
     const float maxRot = .2f;
+    private int time;
 
     // Start is called before the first frame update
     void Start()
@@ -27,6 +30,17 @@ public class Movement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         offset = transform.position.y - cam.transform.position.y;
         trailIndex = 0;
+        time = 0;
+
+        if (ptTracker == null)
+        {
+            ptTracker = FindObjectOfType<PointTracker>().GetComponent<PointTracker>();
+        }
+
+        if (energyBar == null)
+        {
+            energyBar = FindObjectOfType<EnergyBar>().GetComponent<EnergyBar>();
+        }
     }
 
     // Update is called once per frame
@@ -34,7 +48,12 @@ public class Movement : MonoBehaviour
     {
         HandleMovement();
         HandleTrail();
-        //Vector3 vec = new Vector3(rigid.velocity.x, rigid.velocity.y, 0f);
+        time += 1;
+        Debug.Log(time);
+        if (time % 15 == 0)
+        {
+            ptTracker.AddScore(Mathf.Abs((downSpeed / speedMod)));
+        }
     }
 
     // Places and moves the trail as the player moves
