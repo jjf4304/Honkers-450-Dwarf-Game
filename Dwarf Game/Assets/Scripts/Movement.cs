@@ -49,7 +49,6 @@ public class Movement : MonoBehaviour
         HandleMovement();
         HandleTrail();
         time += 1;
-        Debug.Log(time);
         if (time % 15 == 0)
         {
             ptTracker.AddScore(Mathf.Abs((downSpeed / speedMod)));
