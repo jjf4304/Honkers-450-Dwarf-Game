@@ -10,14 +10,15 @@ public class EnergyBar : MonoBehaviour
 
     public Image energyFill;
     public float counter;
-    public int elapsedTime;
+    public int amountToDeduct;
     public float maxTime;
+    
 
     //private bool gameOver;
 
     void Start()
     {
-        elapsedTime = 0;
+        amountToDeduct = 0;
         counter = 0f;
         //gameOver = false;
     }
@@ -29,13 +30,23 @@ public class EnergyBar : MonoBehaviour
         if (counter > 1f )
         {
             counter = 0f;
-            elapsedTime++;
-            energyFill.fillAmount = (maxTime-elapsedTime)/maxTime;
+            amountToDeduct++;
+            energyFill.fillAmount = (maxTime-(amountToDeduct))/maxTime;
         }
 
-        if (elapsedTime >= maxTime - 0.005)
+        if (amountToDeduct >= maxTime - 0.005)
         {
             SceneManager.LoadScene("EndGame");
         }
+
+        
+    }
+
+    public void AddEnergy(int amount)
+    {
+        amountToDeduct -= amount;
+        if (amountToDeduct < 0)
+            amountToDeduct = 0;
+        energyFill.fillAmount = (maxTime - (amountToDeduct)) / maxTime;
     }
 }

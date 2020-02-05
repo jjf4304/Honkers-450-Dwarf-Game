@@ -5,12 +5,14 @@ using UnityEngine;
 public class Collidable : MonoBehaviour
 {
 
-    public enum colliderType { Rock, Scoreable};//... As many as needed
+    public enum colliderType { Rock, Scoreable, PickUp};//... As many as needed
 
     public colliderType type;
     public PointTracker ptTracker;
+    public EnergyBar energyBar;
     public int scoreOnCollide;
     public float speedMod;
+    public int energyAddAmount;
     public Movement playerMove;
     private bool scored;
 
@@ -21,6 +23,8 @@ public class Collidable : MonoBehaviour
             playerMove = FindObjectOfType<Movement>().GetComponent<Movement>();
         if (ptTracker == null)
             ptTracker = FindObjectOfType<PointTracker>().GetComponent<PointTracker>();
+        if (energyBar == null)
+            energyBar = FindObjectOfType<EnergyBar>().GetComponent<EnergyBar>();
         scored = false;
     }
 
@@ -44,6 +48,11 @@ public class Collidable : MonoBehaviour
                 //Temp way to get rid of scoreable
                 gameObject.transform.position = new Vector3(-100, 0, 0);
 
+            }
+            else if(type == colliderType.PickUp)
+            {
+                energyBar.AddEnergy(energyAddAmount);
+                gameObject.transform.position = new Vector3(-100, 0, 0);
             }
         }
     }
