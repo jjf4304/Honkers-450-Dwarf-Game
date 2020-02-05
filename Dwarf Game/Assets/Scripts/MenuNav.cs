@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuNav : MonoBehaviour
 {
+    public GameObject Manager;
+
     public void LoadGame()
     {
+        Destroy(Manager);
         SceneManager.LoadScene("SampleScene");
     }
 
