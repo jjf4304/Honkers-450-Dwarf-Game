@@ -44,6 +44,7 @@ public class Collidable : MonoBehaviour
                 scored = true;
                 ptTracker.AddScore(scoreOnCollide);
 
+                GetComponent<AudioSource>().Play();
 
                 //Temp way to get rid of scoreable
                 gameObject.transform.position = new Vector3(-100, 0, 0);
