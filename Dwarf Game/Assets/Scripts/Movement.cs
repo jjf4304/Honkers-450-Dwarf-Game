@@ -51,7 +51,7 @@ public class Movement : MonoBehaviour
         time += 1;
         if (time % 15 == 0)
         {
-            ptTracker.AddScore(Mathf.Abs((downSpeed / speedMod)));
+            ptTracker.AddScore((int)Mathf.Abs((downSpeed / speedMod)));
         }
     }
 

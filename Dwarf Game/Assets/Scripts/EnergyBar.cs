@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour
@@ -10,7 +11,8 @@ public class EnergyBar : MonoBehaviour
     public Image energyFill;
     public float counter;
     public int elapsedTime;
-    public float maxTime = 100f;
+    public float maxTime;
+
     //private bool gameOver;
 
     void Start()
@@ -30,6 +32,10 @@ public class EnergyBar : MonoBehaviour
             elapsedTime++;
             energyFill.fillAmount = (maxTime-elapsedTime)/maxTime;
         }
-        
+
+        if (elapsedTime >= maxTime - 0.005)
+        {
+            SceneManager.LoadScene("EndGame");
+        }
     }
 }

@@ -8,7 +8,7 @@ public class PointTracker : MonoBehaviour
     private EnergyBar energyScript;
 
     public GameObject pointDisplay;
-    public float score;
+    public int score;
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +23,9 @@ public class PointTracker : MonoBehaviour
         pointDisplay.GetComponent<Text>().text = score.ToString();   
     }
 
-    public void AddScore(float scoreToAdd)
+    public void AddScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        Values.Score = score;
     }
 }
