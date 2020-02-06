@@ -7618,6 +7618,8 @@ MonoBehaviour:
     type: 3}
   scoreBlock: {fileID: 2868058542039004158, guid: 38bdb4ffe514fcc4b97ae355206d9515,
     type: 3}
+  energyBlock: {fileID: 5474658946716463316, guid: 7dfd16a7b7fcda04c98d27e4f2e7f5ac,
+    type: 3}
 --- !u!4 &1670511692
 Transform:
   m_ObjectHideFlags: 0

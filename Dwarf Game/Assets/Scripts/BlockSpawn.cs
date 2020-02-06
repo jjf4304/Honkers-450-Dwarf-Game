@@ -8,7 +8,7 @@ public class BlockSpawn : MonoBehaviour
     public Camera cam;
     public float maxSpawnRate;
     public float minSpawnRate;
-    public GameObject slowBlock, scoreBlock;
+    public GameObject slowBlock, scoreBlock, energyBlock;
 
     private float dist;
     private float timer;
@@ -30,15 +30,24 @@ public class BlockSpawn : MonoBehaviour
         timer += Time.deltaTime;
         if(timer >= timeToSpawn)
         {
-            Instantiate(slowBlock, new Vector3(Random.Range(-7, 7), dist, 0), Quaternion.identity);
-            Instantiate(scoreBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3,3), 0), Quaternion.identity);
-            timeToSpawn = SetTimeToSpawn();
-            timer = 0;
+            SpawnBlocks();
         }
+    }
+
+    void SpawnBlocks()
+    {
+        Instantiate(slowBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
+        Instantiate(scoreBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
+        Instantiate(energyBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
+        timeToSpawn = SetTimeToSpawn();
+        timer = 0;
+
     }
 
     float SetTimeToSpawn()
     {
         return (float)(Random.Range(minSpawnRate, maxSpawnRate));
     }
+
+
 }

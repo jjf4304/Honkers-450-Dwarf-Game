@@ -28,6 +28,14 @@ public class Collidable : MonoBehaviour
         scored = false;
     }
 
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Block"))
+        {
+            transform.position = new Vector3(Random.Range(-7, 7), transform.position.y + Random.Range(-3, 3), 0);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag.Equals("Player"))
