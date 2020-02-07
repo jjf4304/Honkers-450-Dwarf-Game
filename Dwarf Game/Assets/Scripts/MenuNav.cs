@@ -9,6 +9,8 @@ public class MenuNav : MonoBehaviour
 
     public void LoadGame()
     {
+        if (Manager == null)
+            Manager = FindObjectOfType<ContinueMusic>().gameObject;
         Destroy(Manager);
         SceneManager.LoadScene("SampleScene");
     }

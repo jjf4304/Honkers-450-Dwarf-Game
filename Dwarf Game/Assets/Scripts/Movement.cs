@@ -19,7 +19,7 @@ public class Movement : MonoBehaviour
 
     int trailIndex, mapIndex;
     float rotateShipBy = 0;
-    const float rotationAmount = 1.0f;
+    const float rotationAmount = 1.5f;
     const float maxRot = .2f;
     private int time;
 
@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
     // Places and moves the trail as the player moves
     void HandleTrail()
     {
-        trailObjects[trailIndex].transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        trailObjects[trailIndex].transform.position = new Vector3(transform.position.x, transform.position.y, 100);
         trailObjects[trailIndex].transform.rotation = transform.rotation;
         if (trailIndex == trailObjects.Count - 1)
         {
