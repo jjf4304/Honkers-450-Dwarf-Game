@@ -12,10 +12,12 @@ public class Movement : MonoBehaviour
     public float downSpeed;
     public float sideSpeed;
     public List<GameObject> trailObjects;
+    public List<GameObject> mapPieces;
+    public float environmentOffset; // This is the sprite for the middle
     public PointTracker ptTracker;
     public EnergyBar energyBar;
 
-    int trailIndex;
+    int trailIndex, mapIndex;
     float rotateShipBy = 0;
     const float rotationAmount = 1.0f;
     const float maxRot = .2f;
@@ -30,6 +32,7 @@ public class Movement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         offset = transform.position.y - cam.transform.position.y;
         trailIndex = 0;
+        mapIndex = 0;
         time = 0;
 
         if (ptTracker == null)
@@ -58,7 +61,7 @@ public class Movement : MonoBehaviour
     // Places and moves the trail as the player moves
     void HandleTrail()
     {
-        trailObjects[trailIndex].transform.position = new Vector3(transform.position.x, transform.position.y, 10);
+        trailObjects[trailIndex].transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         trailObjects[trailIndex].transform.rotation = transform.rotation;
         if (trailIndex == trailObjects.Count - 1)
         {
@@ -75,7 +78,7 @@ public class Movement : MonoBehaviour
     {
         cam.transform.position = new Vector3(0, transform.position.y - offset, cam.transform.position.z);
         sideSpeed = 0f;
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             sideSpeed = -5f;
             rotateShipBy = -rotationAmount;
@@ -84,7 +87,7 @@ public class Movement : MonoBehaviour
                 rotateShipBy = 0;
             }
         }
-        else if (Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
             sideSpeed = 5f;
             rotateShipBy = rotationAmount;
@@ -113,11 +116,33 @@ public class Movement : MonoBehaviour
         rigid.velocity = new Vector2(sideSpeed/speedMod, downSpeed/speedMod);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Environment"))
+        {
+            Debug.Log(mapIndex);
+            mapPieces[mapIndex].transform.position =
+                   new Vector3(mapPieces[mapIndex].transform.position.x,
+                   mapPieces[mapIndex].transform.position.y - environmentOffset,
+                   mapPieces[mapIndex].transform.position.z);
+            if(mapIndex == mapPieces.Count - 1)
+            {
+                mapIndex = 0;
+            }
+            else
+            {
+                mapIndex++;
+            }
+        }
+    }
+
     public void ModifySpeed(float modifier)
     {
         //when leaving obstacle collider, set back to 1
         //when entering/while within, set to slowdown
         speedMod = modifier;
     }
+
+    
 
 }

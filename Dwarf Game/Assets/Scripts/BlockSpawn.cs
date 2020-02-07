@@ -8,10 +8,12 @@ public class BlockSpawn : MonoBehaviour
     public Camera cam;
     public float maxSpawnRate;
     public float minSpawnRate;
+    public int rateOfFuelSpawn; //how many spawns happen until a fuel spawns.
     public GameObject slowBlock, scoreBlock, energyBlock;
 
     private float dist;
     private float timer;
+    private int spawnFuelCounter;
     private float timeToSpawn;
 
     // Start is called before the first frame update
@@ -19,6 +21,7 @@ public class BlockSpawn : MonoBehaviour
     {
         maxSpawnRate = 1f;
         minSpawnRate = .5f;
+        spawnFuelCounter = 0;
         timer = 0;
         timeToSpawn = 2;
     }
@@ -36,9 +39,14 @@ public class BlockSpawn : MonoBehaviour
 
     void SpawnBlocks()
     {
+        spawnFuelCounter++;
         Instantiate(slowBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
         Instantiate(scoreBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
-        Instantiate(energyBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
+        if(spawnFuelCounter >= rateOfFuelSpawn)
+        {
+            Instantiate(energyBlock, new Vector3(Random.Range(-7, 7), dist + Random.Range(-3, 3), 0), Quaternion.identity);
+            spawnFuelCounter = 0;
+        }
         timeToSpawn = SetTimeToSpawn();
         timer = 0;
 
