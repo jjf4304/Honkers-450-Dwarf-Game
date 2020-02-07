@@ -15,6 +15,12 @@ public class MenuNav : MonoBehaviour
         SceneManager.LoadScene("SampleScene");
     }
 
+    public void PlayAgain()
+    {
+        Destroy(Manager);
+        SceneManager.LoadScene("SampleScene");
+    }
+
     public void LoadHelpMenu()
     {
         SceneManager.LoadScene("HelpMenu");
